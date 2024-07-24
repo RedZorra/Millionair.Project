@@ -1,7 +1,18 @@
 //Game  WWho Wants to be a Millionaire
 //library for user input
 import readlineSync from 'readline-sync';
+/**
+ * Game Rules
+ * 1. There are 15 questions with increasing prize money.
+ * 2. You have two safety nets: at $1,000 and $32,000.
+ * 3. You can quit at any time and take your current winnings.
+ * 4. You have two jokers: 50:50 and Audience Poll.
+ */
 
+/**
+ * Questions
+ * 
+ */
 const questions = [
     {
         question: 'What is the capital of Germany?',
@@ -104,10 +115,16 @@ const questions = [
         answer: 'A:Greenland'
     }
 ]
-
+/**
+ * Money Levels
+ */
 const moneyLevels = [100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000];
 
 // Game function
+/**
+ * function to play the game
+ * @returns - none
+ */
 function playGame() {
     let currentMoney = 0;
     let safetyNet = 0;
@@ -151,6 +168,13 @@ function playGame() {
 }
 
 // Function to ask a question
+/**
+ * 
+ * @param {questionObj} questionObj - question object
+ * @param {fiftyFiftyUsed} fiftyFiftyUsed - 50:50 joker used
+ * @param {audiencePollUsed} audiencePollUsed - Audience Poll joker used
+ * @returns - answer
+ */
 function askQuestion(questionObj, fiftyFiftyUsed, audiencePollUsed) {
     console.log(questionObj.question);
     questionObj.options.forEach(option => console.log(option));
@@ -175,6 +199,10 @@ function askQuestion(questionObj, fiftyFiftyUsed, audiencePollUsed) {
 }
 
 // 50:50 Joker
+/**
+ * function to use 50:50 Joker
+ * @param {questinObj} questionObj - question object
+ */
 function useFiftyFifty(questionObj) {
     const correctAnswer = questionObj.answer.split(':')[0];
     const wrongOptions = questionObj.options.filter(option => !option.startsWith(correctAnswer));
@@ -185,6 +213,10 @@ function useFiftyFifty(questionObj) {
 }
 
 // Audience Poll Joker
+/**
+ * function to use Audience Poll Joker
+ * @param {questinObj} questionObj - question object
+ */
 function useAudiencePoll(questionObj) {
     console.log('The Audience has voted:');
     questionObj.options.forEach(option => {
@@ -197,6 +229,9 @@ function useAudiencePoll(questionObj) {
 }
 
 // Show rules
+/**
+ * function to show game rules
+ */
 function showRules() {
     console.log("\n--- Game Rules ---");
     console.log("1. There are 15 questions with increasing prize money.");
@@ -205,7 +240,10 @@ function showRules() {
     console.log("4. You have two jokers: 50:50 and Audience Poll.");
     console.log("5. Good luck!\n");
 }
-
+/**
+ * main menu
+ * @returns -
+ */
 function mainMenu() {
     while(true) {
         console.log('\n--- Who Wants to be a Millionaire ---');
